@@ -1,0 +1,101 @@
+@startuml
+skinparam linetype ortho
+
+object humanGrid {
+    - title = "Human Grid"
+    - offset = 5
+    + init(title: string, offset: int): void
+    + draw_grid(): void
+    + add_nums_letters_to_grid(): void
+    + sign_grid(): void
+}
+
+object computerGrid {
+    - title = "Computer Grid"
+    - offset = 5
+    + init(title: string, offset: int): void
+    + draw_grid(): void
+    + add_nums_letters_to_grid(): void
+    + sign_grid(): void
+}
+
+object autoShips {
+    - offset = 5
+    - available_blocks = [(2, 2), (3, 3)]
+    - ships_set = [(1, 1), (1, 2), (1, 3), (1, 4)]
+    - ships = ["Ship 1", "Ship 2"]
+    - orientation = 0
+    - direction = 1
+    + init(offset: int): void
+    + create_start_block(available_blocks: set): tuple
+    + create_ship(number_of_blocks: int, available_blocks: set): list
+    + get_new_block_for_ship(coor: int, direction: int, orientation: int, ship_coordinates: list): tuple
+    + is_ship_valid(new_ship: list): bool
+    + add_new_ship_to_set(new_ship: list): void
+    + update_available_blocks_for_creating_ships(new_ship: list): void
+    + populate_grid(): list
+}
+
+object currentGame {
+    - human = "Player"
+    - computer = "Computer"
+    - computer_available_to_fire_set = [(5, 5), (6, 5)]
+    - around_last_computer_hit_set = [(1, 2)]
+    - fired_block = (1, 1)
+    - human_ships_working = true
+    - human_ships_to_draw = ["Ship 1", "Ship 2"]
+    - human_ships_set = [(1, 1), (1, 2), (1, 3), (1, 4)]
+    - game_over_font = null
+    + draw_ships()
+    + show_message_at_rect_center()
+    + check_hit_or_miss()
+    + draw_from_dotted_set()
+    + draw_hit_blocks()
+    + computer_shoots()
+    + main()
+}
+
+object humanPlayer {
+    - name = "Player"
+    - grid = humanGrid
+    + init(name: string)
+    + place_ships()
+    + shoot(coord: tuple)
+}
+
+object computerPlayer {
+    - name = "Computer"
+    - grid = computerGrid
+    + init(name: string)
+    + place_ships()
+    + shoot(coord: tuple)
+}
+
+object humanShip {
+    - length = 4
+    - orientation = "Horizontal"
+    - hits = [(1, 1)]
+    + init(start: tuple, end: tuple)
+    + is_sunk()
+    + register_hit(coord: tuple)
+}
+
+object computerShip {
+    - length = 4
+    - orientation = "Vertical"
+    - hits = []
+    + init(start: tuple, end: tuple)
+    + is_sunk()
+    + register_hit(coord: tuple)
+}
+
+humanPlayer -left-> humanGrid
+computerPlayer -right-> computerGrid
+
+currentGame -down-> humanPlayer
+currentGame -down-> computerPlayer
+currentGame -down-> autoShips
+
+autoShips -down-> humanShip
+autoShips -down-> computerShip
+@enduml

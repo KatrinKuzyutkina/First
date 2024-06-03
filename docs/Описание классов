@@ -1,0 +1,107 @@
+@startuml
+skinparam linetype ortho
+
+class Grid {
+    - title: string
+    - offset: int
+    + init(title: string, offset: int): void
+    + draw_grid(): void
+    + add_nums_letters_to_grid(): void
+    + sign_grid(): void
+}
+
+class Button {
+    - title: string
+    - title_width: int
+    - title_height: int
+    - message: string
+    - button_width: int
+    - button_height: int
+    - x_start: int
+    - y_start: int
+    - rect_for_draw: tuple
+    - rect: pygame.Rect
+    - rect_for_button_title: tuple
+    - color: tuple
+    + init(x_offset: int, button_title: string, message_to_show: string): void
+    + draw_button(color=None): void
+    + change_color_on_hover(): void
+    + print_message_for_button(): void
+}
+
+
+class AutoShips {
+    - offset: int
+    - available_blocks: set
+    - ships_set: set
+    - ships: list
+    - orientation: int
+    - direction: int
+    + init(offset: int): void
+    + create_start_block(available_blocks: set): tuple
+    + create_ship(number_of_blocks: int, available_blocks: set): list
+    + get_new_block_for_ship(coor: int, direction: int, orientation: int, ship_coordinates: list): tuple
+    + is_ship_valid(new_ship: list): bool
+    + add_new_ship_to_set(new_ship: list): void
+    + update_available_blocks_for_creating_ships(new_ship: list): void
+    + populate_grid(): list
+}
+
+class Game {
+  - human: Player
+  - computer: Computer
+  - computer_available_to_fire_set
+  - around_last_computer_hit_set
+  - fired_block
+  - human_ships_working
+  - human_ships_to_draw
+  - human_ships_set
+  - game_over_font
+  --
+  + draw_ships()
+  + show_message_at_rect_center()
+  + check_hit_or_miss()
+  + draw_from_dotted_set()
+  + draw_hit_blocks()
+  + computer_shoots()
+  + main()
+}
+
+class Player {
+  - name: string
+  - grid: Grid
+  + init(self, name: str)
+  + place_ships(self)
+  + shoot(self, coord: Tuple[int, int])
+}
+
+class Computer {
+  - grid: Grid
+  + init(self, name: str)
+  + place_ships(self)
+  + shoot(self, coord: Tuple[int, int])
+}
+
+class Ship {
+  - length: int
+  - orientation: string
+  - hits: list<tuple>
+  --
+  + init(self, start: Tuple[int, int], end: Tuple[int, int])
+  + is_sunk(self)
+  + register_hit(self, coord: Tuple[int, int])
+}
+
+Ship --> Player: composed of
+Ship --> Computer: composed of
+Grid --> Ship: refers to
+
+Game -down-> Grid: interacts with
+Game -down-> Button: interacts with
+Game -down-> AutoShips: interacts with
+Game -down-> Player: has
+Game -down-> Computer: has
+@enduml
+
+
+https://www.planttext.com/api/plantuml/png/lLRDZfim4Bxp53vcjQ4FWDhLjdlOMrLrUwigom43Li16zf1iLFNTEnviC2IxlJM7A9d_RxwPWKS7miBOTvaxAZq8AthMAItXCaXcBBGcoyfEECUUhQhOxupX9sUWe9C5Ss2LReBCrBMJK32bWIJt-4l1RcMwJwtk2dOogWh6bHLdtc2ItLekgehhiNUyam3IEWxcbfbJZLxB_yJAlum0HhzREyduMLNGBW2Yk9MgQI6Lzz8vqMo372ZFTPGWlmxpogdxgUXoBRAo15uRots72WRZqCb4LR3XqeXUVlYEVxOk8NM0dBgMfZCs5GMwNdd2q9wj0qGI0tvFXMlDEIfk43hvxoZRfwz6oxLDsGgDSKZDVO_CITeDimE61XvJBgXIeWFJdqSmBwqQt4psTYXp9av2TUA0l1uwKnuT5Y-ZpdbVJWuROO5RuQB4M2Kr2516fv4hvVk-4eQclZdqfPK2vCJvLC_kPdrtQwQY6rQsmzquI6nUFTiJSM-5cM7SiqO2r_8y6L1ZAM1f_61Ga3MY_HNmFJM7UuzAQImfz6bJhd8KcPz4X_lfK_g_i-d1c2vTzg2dwP9mRP_qRnmgtuWjM093JSAf96VtRfZ136Fd0yK3GbsQ3yWphXTDLCxQiHU8_LidBj9cqoBrmuY7gM1FuTTAdDI6U6fiA9z62oVHcb5N75C0dyrR1RE1jwucI4lo2Gu_6tkSJizQZadyubt9Oqn_AhZVCkmH3McUP_EsJfsw8u5Vx7dh172wAINIxnSqcvPNujpuWh7RlNBHaqBLrlIyCdYoAs8nKNcFYQSOA8B7d0QYj1SATtnXOUfvu44ZZEJy8Yvahg27L3QldPDTlLzCfx139qePa7g36Qs93ZJE1VlX9_WdJJb-_KegYKI7MlvdQd_TGjfEwcPvq6okKj8PR7TOou-qb0yBwKcfuR6poRndKj-g9sxrg8y94YiRp38DyRy14PGyVmZ45ZG6niaAZ_QYV9hNArNJouXNlz16MrdZcm43V5cXNSqhSzQeVIPcb9zPKO9ZPmNjsc9wDtZVPdwgl6yMORJ2hHKB1Azwn8xY-zPV

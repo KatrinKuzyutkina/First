@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    start[Игра началась. Ваш ход!]
+    initVars[Создаётся массив для отслеживания попаданий в координаты кораблей противника]
+    hit[Попадание в корабль]
+    updateCounter[Увеличивается счетчик попаданий]
+    saveCoordinates[Сохраняются координаты попадания]
+    check{Попаданий >= 5?}
+    activate["Дополнительный ход, Бомба активирована"]
+    determineCenter[Определяется центральная точка]
+    applyBomb[Наносится удар 3x3]
+    resetVars[Сбрасывается счетчик и координаты]
+
+    start --> initVars
+    initVars --> hit
+    hit --> updateCounter
+    updateCounter --> saveCoordinates
+    saveCoordinates --> check
+    check --> |Нет| hit
+    check --> |Да| activate
+    activate --> determineCenter
+    determineCenter --> applyBomb
+    applyBomb --> resetVars
+    resetVars --> hit
+```
