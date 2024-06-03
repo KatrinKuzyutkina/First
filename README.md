@@ -1,3 +1,9 @@
+[![CI/CD GitHub Actions](https://github.com/KatrinKuzyutkina/First/actions/workflows/makefile.yml/badge.svg)]
+[![Coverage Status](https://coveralls.io/repos/KatrinKuzyutkina/First/badge.svg?branch=main)](https://coveralls.io/github/KatrinKuzyutkina/gtest?branch=main)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=KatrinKuzyutkina_First&metric=alert_status)](https://sonarcloud.io/dashboard?id=KatrinKuzyutkina_First)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=KatrinKuzyutkina_First&metric=bugs)](https://sonarcloud.io/summary/new_code?id=KatrinKuzyutkina_First)
+[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=KatrinKuzyutkina_First&metric=code_smells)](https://sonarcloud.io/dashboard?id=KatrinKuzyutkina_First)
+
 # Игра "Битва Кораблей"
 **Битва Кораблей** - это захватывающая боевая игра, в которой пользователь соревнуется против компьютера, стреляя по кораблям на игровом поле. 
 Игровое поле представляет собой сетку 10x10 клеток, где каждая клетка имеет свои координаты.
