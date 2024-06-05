@@ -64,7 +64,7 @@ flowchart TD
 
 ### Диаграмма неудачного предыдущего хода
 
-![Диаграмма неудачного хода](https://github.com/KatrinKuzyutkina/First/blob/main/docs/pictures/4.png)
+![Диаграмма неудачного хода](https://github.com/KatrinKuzyutkina/First/blob/main/docs/diagrams/4.png)
 
 ### Диаграмма затонувших кораблей
 
